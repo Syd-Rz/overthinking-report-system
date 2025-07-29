@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You Did It!</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 5%;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+
+
+    /* Thank you page background */
+    body.thankyou {
+      background-image: url('duck2.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: black;
+}
+
+
+    /* Message box responsive container */
+  #message-box {
+  background-color: rgba(255, 255, 255, 0.25); /* Lower opacity for glassy effect */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px); /* Safari support */
+  padding: 8%;
+  border-radius: 20px;
+  margin: 5% auto;
+  max-width: 90%;
+  width: 90%;
+  max-width: 200px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.8s ease-out;
+  position: relative;
+  top: -20vh; /* Move it up by 5% of the viewport height */
+}
+
+}
+
+
+    #message-box h1 {
+      font-size: clamp(1.5rem, 5vw, 2.8rem);
+      margin-bottom: 5%;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    #message-box p {
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      margin: 6% 0;
+      color: #555;
+      line-height: 1.6;
+      max-width: 100%;
+      word-wrap: break-word;
+    }
+
+    #message-box a {
+      display: inline-block;
+      background-color: #ff8a80;
+      color: white;
+      text-decoration: none;
+      padding: 3% 6%;
+      border-radius: 10px;
+      margin-top: 5%;
+      transition: all 0.3s ease;
+      font-weight: bold;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      min-width: 40%;
+    }
+
+    #message-box a:hover {
+      background-color: #ff6e63;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 138, 128, 0.4);
+    }
+
+    .emoji-icon {
+      width: clamp(20px, 4vw, 35px);
+      height: clamp(20px, 4vw, 35px);
+      vertical-align: middle;
+      margin: 0 2%;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding: 3%;
+        background-attachment: scroll;
+      }
+
+      #message-box {
+        padding: 6%;
+        margin: 3% auto;
+        max-width: 95%;
+      }
+
+      #message-box h1 {
+        margin-bottom: 6%;
+      }
+
+      #message-box p {
+        margin: 5% 0;
+      }
+
+      #message-box a {
+        padding: 4% 8%;
+        margin-top: 6%;
+        width: 80%;
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 2%;
+      }
+
+      #message-box {
+        padding: 5%;
+        margin: 2% auto;
+        border-radius: 15px;
+      }
+
+      #message-box h1 {
+        word-break: break-word;
+      }
+
+      #message-box a {
+        width: 85%;
+        padding: 4% 6%;
+      }
+
+      .emoji-icon {
+        margin: 0 1%;
+      }
+    }
+
+    /* Landscape orientation on mobile */
+    @media (max-height: 500px) and (orientation: landscape) {
+      body {
+        padding: 2%;
+      }
+
+      #message-box {
+        padding: 4%;
+        margin: 2% auto;
+      }
+
+      #message-box h1 {
+        margin-bottom: 3%;
+      }
+
+      #message-box p {
+        margin: 3% 0;
+      }
+
+      #message-box a {
+        margin-top: 4%;
+      }
+    }
+
+    /* Very large screens */
+    @media (min-width: 1200px) {
+      #message-box {
+        padding: 4%;
+        max-width: 700px;
+      }
+    }
+
+    /* High DPI displays */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      #message-box {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      }
+    }
+  </style>
+</head>
+<body class="thankyou">
+  <div id="message-box">
+    <h1>
+      <img src="partying-face.png" alt="🥳" class="emoji-icon">
+      Overthought Submitted
+      <img src="partying-face.png" alt="🥳" class="emoji-icon">
+    </h1>
+    
+    <p id="response-text"></p>
+    <a href="index.html">Report Another Thought</a>
+  </div>
+
+  <script>
+    // Run confetti when the page loads with responsive particle count
+    const isMobile = window.innerWidth <= 768;
+    const particleCount = isMobile ? 150 : 300;
+    
+    confetti({
+      particleCount: particleCount,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
+    // Additional confetti bursts for desktop
+    if (!isMobile) {
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+      }, 200);
+
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+      }, 400);
+    }
+
+    // Display the message from the form page
+    const params = new URLSearchParams(window.location.search);
+    const message = params.get('msg');
+    document.getElementById("response-text").textContent = message || "You're free now. Breathe easy.";
+
+    // Add some responsive behavior for orientation changes
+    window.addEventListener('orientationchange', function() {
+      setTimeout(() => {
+        // Adjust confetti for new orientation
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile !== isMobile) {
+          location.reload(); // Simple solution for orientation change
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>
+
+  
+  
