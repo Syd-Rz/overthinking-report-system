@@ -4,7 +4,7 @@ A little place to let your worries go quack! No info is saved — just a fun spo
 - Type whatever's bothering you in the box.
 - Hit submit.
 - Get a fun, lighthearted message back to help you chill.
-- No sign-ups, no data saved — just good vibes.
+- No sign-ups, no data saved,just good vibes.
 ## Why did I make this?
 Sometimes our minds go in circles, like ducks paddling in a pond. This is a simple way to take a quick break, vent a little, and get a smile.
 ## How to use
