@@ -17,27 +17,26 @@
       padding: 20px;
       text-align: center;
       min-height: 100vh;
-    }
-
-    /* Main page background */
-    body.mainpage {
-  background-image: url('duck.jpg');
-  background-size: cover; /* Make it cover the whole screen */
-  background-repeat: no-repeat; /* Don't tile */
-  background-position: center center; /* Center the image */
-  background-attachment: fixed; /* Optional: makes it stay in place while scrolling */
-}
-
-
-    /* Thank you page background */
-    body.thankyou {
-      background-image: url('duck2.jpg'), url('duck2.jpg');
-      background-position: top left, bottom right;
-      background-size: 50% 50%, 50% 50%;
-      background-repeat: no-repeat, no-repeat;
+      /* Consistent background for all devices */
+      background-image: url('duck.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
       background-attachment: fixed;
-      background-color: black;
+      
+      
+      
     }
+    @media screen and (max-width: 768px) {
+  body {
+    background-image: url('phoneduck.jpg'); /* Your mobile image */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll; /* Better performance on mobile */
+  }
+
+   
+}
 
     /* Container for better responsive control */
     .container {
@@ -150,7 +149,6 @@
       padding: 20px;
       background-color: rgba(255,255,255,0.1);
       border-radius: 15px;
-  
     }
 
     .emergency-button-box p {
@@ -235,46 +233,6 @@
       background-color: #7f062c;
     }
 
-    /* Thank you page styles */
-    #message-box {
-      background-color: rgba(255,255,255,0.9);
-      padding: 30px;
-      border-radius: 20px;
-      margin: 50px auto;
-      max-width: 500px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-
-    #message-box h1 {
-      font-size: clamp(1.5rem, 4vw, 2.5rem);
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    #message-box p {
-      font-size: 1.2rem;
-      margin: 20px 0;
-      color: #555;
-      line-height: 1.5;
-    }
-
-    #message-box a {
-      display: inline-block;
-      background-color: #ff8a80;
-      color: white;
-      text-decoration: none;
-      padding: 12px 25px;
-      border-radius: 10px;
-      margin-top: 20px;
-      transition: all 0.3s ease;
-      font-weight: bold;
-    }
-
-    #message-box a:hover {
-      background-color: #ff6e63;
-      transform: translateY(-2px);
-    }
-
     .emoji-icon {
       width: clamp(20px, 3vw, 30px);
       height: clamp(20px, 3vw, 30px);
@@ -310,118 +268,9 @@
       0% { transform: scale(0.8); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
-
-    /* Mobile-specific adjustments */
-    @media (max-width: 768px) {
-      body {
-        padding: 3%;
-        background-attachment: scroll;
-      }
-
-      body.mainpage {
-        background-size: 40% 40%, 40% 40%;
-        background-position: top 2% left 2%, bottom 2% right 2%;
-      }
-
-      .heading-box {
-        margin-bottom: 4%;
-      }
-
-      textarea {
-        min-height: 15vh;
-      }
-
-      #emoji-picker {
-        gap: 2%;
-        padding: 3% 1%;
-      }
-
-      .emoji-option {
-        width: 8vw;
-        height: 8vw;
-        min-width: 35px;
-        min-height: 35px;
-      }
-
-      .emergency-button-box {
-        padding: 4%;
-        margin: 5% 0;
-      }
-
-      .cute-alert-box {
-        padding: 5%;
-        margin: 3%;
-      }
-
-      .cute-alert-box p {
-        font-size: 1rem;
-      }
-
-      #message-box {
-        margin: 5% auto;
-        padding: 5%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 2%;
-      }
-
-      body.mainpage {
-        background-size: 35% 35%, 35% 35%;
-        background-position: top 1% left 1%, bottom 1% right 1%;
-      }
-
-      .heading-box h1 {
-        word-break: break-word;
-      }
-
-      #emoji-picker {
-        gap: 1.5%;
-      }
-
-      .emoji-option {
-        width: 10vw;
-        height: 10vw;
-        min-width: 30px;
-        min-height: 30px;
-      }
-
-      button {
-        width: 90%;
-        max-width: 300px;
-      }
-
-      .emergency-button-box button {
-        width: 85%;
-        max-width: 250px;
-      }
-    }
-
-    /* Landscape orientation on mobile */
-    @media (max-height: 500px) and (orientation: landscape) {
-      body.mainpage {
-        background-size: 25% 45%, 25% 45%;
-        background-position: top 5% left 2%, bottom 5% right 2%;
-      }
-
-      .heading-box {
-        margin-bottom: 3%;
-      }
-
-      .emergency-button-box {
-        margin: 3% 0;
-        padding: 2%;
-      }
-
-      textarea {
-        min-height: 12vh;
-      }
-    }
   </style>
 </head>
-<body class="mainpage">
+<body>
   <div class="container">
     <div class="heading-box">
       <h1>Overthinking Report System</h1>
@@ -511,15 +360,14 @@
       "We consulted the stars. They said, 'relax.'",
       "Emotional support ducks have been dispatched. ETA: right now.",
       "Your worry has been recycled into positive energy. Thanks for your donation.",
-      "The Overthink-O-Meter is reading “eh, you’re good.”",
+      "The Overthink-O-Meter is reading 'eh, you're good.'",
       "You're not too much. Your brain is just doing parkour.",
       "False alarm! The thing you feared is just your brain being dramatic again.",
       "Your submission has been hugged, high-fived, and let go.",
       "You're doing great. Your brain is just being a bit of a drama queen.",
-      "Good news: You’re not alone. Bad news: You’ve overthought again. Final result: still lovable.",
-      "The situation has been reviewed by the Council of Quacks. Verdict: you’re fine. Seriously.",
-      "A wise duck gave your worry a thoughtful quack and said, “It’s all good.”"
-
+      "Good news: You're not alone. Bad news: You've overthought again. Final result: still lovable.",
+      "The situation has been reviewed by the Council of Quacks. Verdict: you're fine. Seriously.",
+      "A wise duck gave your worry a thoughtful quack and said, 'It's all good.'"
     ];
 
     // Emoji selection functionality
